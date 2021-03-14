@@ -9,3 +9,4 @@ Recieve important info about your upcoming assginments!
 
 To do:
     - Connect with Twilio api to send sms to user's phone number
+    - Schedule application to only send SMS at previous day
