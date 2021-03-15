@@ -38,7 +38,7 @@ def fetch_upcoming_task():
         )
 
         date_of_first_task = tasks.find_elements_by_class_name("group_heading")[0]
-        is_tommorow = "homme" in date_of_first_task.text
+        is_tommorow = "homme" in date_of_first_task.text # check if task is tomorrow
         print(is_tommorow)
 
         first_todo = tasks.find_elements_by_class_name("todo")[0]
@@ -58,15 +58,18 @@ def fetch_upcoming_task():
             todo_details["type"] = type_of_task
         todo_details["content"] = formatted_content
 
-        print(todo_details)
+        time.sleep(3)
+        log_out = driver.find_element_by_class_name("st-nav-item st-nav-item-with-menu st-nav-item_profile_tools")
+        print(log_out.text)
+        time.sleep(10)
 
     finally:
         driver.quit()
 
 
 
-schedule.every().day.at("23:00").do(fetch_upcoming_task)
+schedule.every(10).seconds.do(fetch_upcoming_task)
 
 while True:
     schedule.run_pending()
-    time.sleep(10)
+    time.sleep(2)
