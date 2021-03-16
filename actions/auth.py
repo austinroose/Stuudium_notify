@@ -24,10 +24,10 @@ def log_out(driver):
     # get navigation menu button that opens hover menu
     upper_navigation = driver.find_element_by_id("stuudium-navigation")
     upper_menu_buttons = upper_navigation.find_elements_by_tag_name("span")
-        for button in upper_menu_buttons:
-            class_name = button.get_attribute("class")
-            if class_name == "st-nav-item st-nav-item-with-menu st-nav-item_profile_tools":
-                logout_hover_menu_button = button
+    for button in upper_menu_buttons:
+        class_name = button.get_attribute("class")
+        if class_name == "st-nav-item st-nav-item-with-menu st-nav-item_profile_tools":
+            logout_hover_menu_button = button
 
     # move mouse to hover menu that contains logout button
     def hover_to_logout_menu(browser, menu_btn): 
