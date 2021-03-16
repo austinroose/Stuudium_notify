@@ -3,36 +3,31 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 import schedule
 import os
+from actions import auth
 
 
 def fetch_upcoming_task():
 
     options = webdriver.ChromeOptions()
-    options.binary_location= r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+    options.binary_location= r"C:\Program Files\Google\Chrome\Application\chrome.exe" #path where chrome is located
 
-    PATH = r"C:\Program Files (x86)\chromedriver.exe"
+    PATH = r"C:\Program Files (x86)\chromedriver.exe" # path where chrome driver is located
     driver = webdriver.Chrome(PATH, chrome_options=options)
 
     driver.get("https://htg.ope.ee/auth/?return=%2Fs%2F1635")
 
-    username = driver.find_element_by_name("data[User][username]")
-    enter_username = os.environ.get("STUUDIUM_USERNAME")
-    username.send_keys(enter_username)
-
-    password = driver.find_element_by_name("data[User][password]")
-    enter_password = os.environ.get("STUUDIUM_PWD")
-    password.send_keys(enter_password)
-
-    password.send_keys(Keys.RETURN)
+    auth.log_in(driver)
 
     def format_task_content(content):
         text = content.split("\n")
         return text
 
     try:
+
         tasks = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "scheduled"))
         )
@@ -59,16 +54,14 @@ def fetch_upcoming_task():
         todo_details["content"] = formatted_content
 
         time.sleep(3)
-        log_out = driver.find_element_by_class_name("st-nav-item st-nav-item-with-menu st-nav-item_profile_tools")
-        print(log_out.text)
-        time.sleep(10)
+
+        # auth.log_out(driver)
 
     finally:
         driver.quit()
 
 
-
-schedule.every(10).seconds.do(fetch_upcoming_task)
+schedule.every(10).seconds.do(fetch_upcoming_task) # do task every 10 seconds
 
 while True:
     schedule.run_pending()
