@@ -8,5 +8,6 @@ Stuudium: https://stuudium.com/
 Recieve important info about your upcoming assginments!
 
 To do:
-    - Connect with Twilio api to send sms to user's phone number
+    - Check whether upcoming task is assgined for tomorrow
+    - Fetch type of task from browser (if it is regular exercise or test)
     - Schedule application to only send SMS at previous day
