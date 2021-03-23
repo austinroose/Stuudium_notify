@@ -27,8 +27,8 @@ def fetch_upcoming_task():
     driver.quit()
 
 
-schedule.every(10).seconds.do(fetch_upcoming_task) # do task every 10 seconds
+schedule.every(30).seconds.do(fetch_upcoming_task) # do task every 10 seconds
 
 while True:
     schedule.run_pending()
-    time.sleep(2)
+    time.sleep(30)
