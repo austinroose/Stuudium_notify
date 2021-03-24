@@ -29,7 +29,7 @@ def fetch_upcoming_task():
     driver.quit()
 
 
-schedule.every().day.at("18:05").do(fetch_upcoming_task) # do task every 10 seconds, Heroku uses UTC for default
+schedule.every().day.at("18:23").do(fetch_upcoming_task) # do task every 10 seconds, Heroku uses UTC for default
 
 while True:
     schedule.run_pending()
